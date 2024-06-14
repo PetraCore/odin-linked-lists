@@ -107,4 +107,23 @@ export default class LinkedList {
     string += "null";
     return string;
   }
+
+  // Deliberately changed the parameters order to make it more intuitive
+  insertAt(index, value) {
+    if (index < 1) return this.prepend(value);
+    if (index >= this.size) return this.append(value);
+    this.size++;
+
+    let prev = this.head;
+    for (let i = 0; i < index - 1; i++) {
+      prev = prev.nextNode;
+    }
+
+    const node = new Node(value);
+    const next = prev.nextNode;
+    prev.nextNode = node;
+    node.nextNode = next;
+
+    return node;
+  }
 }

@@ -126,4 +126,32 @@ export default class LinkedList {
 
     return node;
   }
+
+  removeAt(index) {
+    if (index >= this.size) return this.pop();
+
+    let prev = this.head;
+    if (prev === null) return null;
+    this.size--;
+
+    if (this.size === 0) {
+      this.tail = null;
+      this.head = null;
+      return prev;
+    }
+
+    if (index <= 0) {
+      this.head = prev.nextNode;
+      return prev;
+    }
+
+    for (let i = 0; i < index - 1; i++) {
+      prev = prev.nextNode;
+    }
+
+    const deleted = prev.nextNode;
+    prev.nextNode = deleted.nextNode;
+
+    return deleted;
+  }
 }
